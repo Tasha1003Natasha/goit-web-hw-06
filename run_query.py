@@ -1,7 +1,7 @@
 import sqlite3
 
 
-with open("query_10.sql", "r", encoding="utf-8") as f:
+with open("query_1.sql", "r", encoding="utf-8") as f:
     sql = f.read()
 
 with sqlite3.connect("students.db") as con:
