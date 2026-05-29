@@ -10,5 +10,6 @@ JOIN teachers t
     ON
 	 t.id = sub.teacher_id
 WHERE
-	t.id = 1
+	t.id = 2
 	
+ORDER BY average_grade DESC

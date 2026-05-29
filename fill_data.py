@@ -34,18 +34,9 @@ def generate_fake_data(number_groups, number_students, number_teachers, number_s
         fake_subjects.append(fake_data.word())
 
     for _ in range(number_grades):
-        fake_grades.append(fake_data.random_int(min=1, max=10))
+        fake_grades.append(fake_data.random_int(number_grades))
 
     return fake_groups, fake_students, fake_teachers, fake_subjects,  fake_grades
-
-
-groups, students, teachers, subjects,  grades = generate_fake_data(
-    NUMBER_GROUPS, NUMBER_STUDENTS, NUMBER_TEACHERS, NUMBER_SUBJECTS, NUMBER_GREADES)
-# print("groups:", groups)
-# print("students:", students)
-# print("teachers:", teachers)
-# print("subjects:", subjects)
-# print("grades:", grades)
 
 
 def prepare_data(groups, students, teachers, subjects,  grades) -> tuple():
@@ -70,25 +61,26 @@ def prepare_data(groups, students, teachers, subjects,  grades) -> tuple():
         for_subjects.append((subject, teacher_id))
 
     for_grades = []
-    for grade in grades:
-        student_id = randint(1, len(students))
-        subject_id = randint(1, len(subjects))
-        random_days = randint(1, 365)
-        grade_date_of = (
-            datetime.now() - timedelta(days=random_days)
-        ).date()
-        for_grades.append((grade, grade_date_of, student_id, subject_id))
+    for student_id in range(1, len(students) + 1):
+
+        for grade in grades:
+            subject_id = randint(1, len(subjects))
+            random_days = randint(1, 365)
+
+            grade_date_of = (
+                datetime.now() - timedelta(days=random_days)
+            ).date()
+
+            for_grades.append(
+                (
+                    grade,
+                    grade_date_of,
+                    student_id,
+                    subject_id,
+                )
+            )
 
     return for_groups, for_students, for_teachers, for_subjects, for_grades
-
-
-groups, students, teachers, subjects,  grades = prepare_data(
-    *generate_fake_data(NUMBER_GROUPS, NUMBER_STUDENTS, NUMBER_TEACHERS, NUMBER_SUBJECTS, NUMBER_GREADES))
-# print("for_groups:", groups)
-# print("for_students:", students)
-# print("for_subjects:", subjects)
-# print("for_teachers:", teachers)
-# print("for_grades:", grades)
 
 
 def insert_data_to_db(groups, students, teachers, subjects, grades) -> None:

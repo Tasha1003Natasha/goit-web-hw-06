@@ -9,6 +9,7 @@ JOIN students s
 
 JOIN subjects sub
     ON g.subject_id = sub.id
-
-GROUP BY s.id, sub.id
+    
+WHERE sub.id = 1
+GROUP BY s.id, s.student_name, sub.id, sub.subject_name
 ORDER BY average_grade DESC;
