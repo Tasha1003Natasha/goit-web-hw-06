@@ -13,3 +13,4 @@ JOIN subjects sub
 WHERE sub.id = 1
 GROUP BY s.id, s.student_name, sub.id, sub.subject_name
 ORDER BY average_grade DESC;
+LIMIT 1;
